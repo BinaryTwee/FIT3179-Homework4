@@ -1,0 +1,71 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Countries with the most Billionaires",
+    "width": 1050,
+    "height": 650,
+    "projection": {"type": "equirectangular"},
+    "data": {
+          "url": "https://raw.githubusercontent.com/BinaryTwee/FIT3179/main/homework3/main/js/ne_110m.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}},
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+          "format": {"type": "topojson", "feature": "oceans"}
+        },
+        "mark": {"type": "geoshape", "fill": "skyblue"}
+      },
+      {"data": {
+          "url": "https://raw.githubusercontent.com/BinaryTwee/FIT3179/main/homework3/main/js/ne_110m.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  
+      }, 
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}},
+      {"data": {
+          "url": "https://raw.githubusercontent.com/BinaryTwee/FIT3179/main/homework3/main/js/ne_110m.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+  
+      }, 
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}},
+      {
+        "transform": [
+          {
+            "calculate": "'No Billionaires in ' + datum.properties.NAME",
+            "as": "note"
+          }
+        ],
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
+        "encoding": {"tooltip": {"field": "note"}}
+      },
+      {    "transform": [
+        {
+          "lookup": "properties.NAME",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/BinaryTwee/FIT3179/main/homework3/main/data/Billionaire_clean.csv"
+            },
+            "key": "Country",
+            "fields": ["Count"]
+          }
+        },
+        {"calculate": "datum.Count" , "as": "Number of Billionaires"}
+      ],
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "field": "Number of Billionaires",
+          "type": "quantitative",
+          "scale": {
+              "type": "log", 
+              "scheme": "greens"
+              
+              }
+        },
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+          {"field": "Count", "type": "quantitative"}
+        ]
+      }}
+      
+    ]
+  }

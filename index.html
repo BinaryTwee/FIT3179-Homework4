@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>The World's Billionaires | FIT3179 - Homework</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>The world's Billionaires</h1>
+        <p>Based on the Forbes' Billionaire List of 2021, this dashboard explores some statistics abouut the world's wealthiest people</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+            <!-- pure grid group -->
+            <div class="pure-g">
+              <div class="pure-u-1-1">
+                <div class="description description-left">
+                  <h2>Which countries have the most Billionaires?</h2>
+                  <p>The spread of the world's Billionaires spans all across the globe. This visualisation looks at the spread and concentration of Billionaires across the different 
+                    countries and continents. Countries with a higher number of Billionaires are represented by a greater concentration of green. Currently the top 2 countries are China and the United States.
+                    North America currently has the most Billionaires. 
+
+                  </p>
+                </div>
+            <!-- pure grid group (viz) -->
+            </div>
+              <div class="pure-u-1-1" style="width: 40%;">
+                <div id="vis1" class="vis-container" style="margin-left: 0px;"></div>
+              </div>
+            </div>
+            <!-- end pure grid group -->
+        <!-- pure grid group -->
+        <div class="pure-g">
+          <div class="pure-u-1-1">
+            <div class="description description-left">
+              <h2>A further analysis on the Billionaires of each country</h2>
+              <p>The next bubble chart showcases the average age of each country's Billionaires and their average net worth. There is a slider filter which you can set a minimum net worth 
+                to filter out countries. France has the highest average net worth of Billionaires. The average age for Billionaires are in the older generation with Eswati (Swaziland) having the oldest 
+                average age. 
+              </p>
+            </div>
+        <!-- pure grid group (viz) -->
+        </div>
+          <div class="pure-u-1-1" style="width: 40%;">
+            <div id="vis2" class="vis-container" style="margin-left: 0px;"></div>
+          </div>
+        </div>
+        <!-- end pure grid group -->
+    
+
+       
+  </div> <!-- end page -->
+
+  <script type="text/javascript">
+    var specVis1 = "./js/hw3.vg.json";
+    var specVis2 = "./js/hw4.vg.json";
+
+    vegaEmbed('#vis1', specVis1, { "actions": false });
+
+    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis3', specVis1, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+</body>
+
+</html>

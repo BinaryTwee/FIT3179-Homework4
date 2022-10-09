@@ -1,0 +1,97 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 600,
+    "title": "Average age and net worth of Billionaires of each country",
+    "data": {
+      "url": "https://raw.githubusercontent.com/BinaryTwee/FIT3179/main/Homework%204/data/BillionaireClean.csv"
+    },
+    "params": [
+      {
+        "name": "NameCount",
+        "value": 0,
+        "bind": {
+          "input": "range",
+          "min": 0,
+          "max": 700,
+          "step": 1,
+          "name": "Minimum Net Worth: "
+        }
+      }
+    ],
+    "transform": [
+      {"filter": "datum.AverageofNetWorth > 0"},
+      {"filter": "datum.AverageofAge > 0"},
+      {"filter": "datum.CountofName > NameCount"}
+    ],
+
+    "encoding": {
+      "x": {
+        "field": "AverageofAge",
+        "type": "quantitative",
+        "title": "Age of Billionaire",
+        "axis": {"tickCount": 5},
+        "scale": {"type": "linear", "domain": [1, 100]}
+      },
+      "y": {
+        "field": "AverageofNetWorth",
+        "type": "quantitative",
+        "title": "Net Worth in Billions",
+        "axis": {"tickCount": 10},
+        "scale": {"type": "log", "domain": [1, 20]}
+      }
+    },
+    "layer": [
+      {
+        "mark": "circle",
+        "encoding": {
+          "size": {
+            "field": "CountofName",
+            "title": "Count of Billionaire",
+            "type": "quantitative",
+            "scale": {
+              "type": "threshold",
+              "domain": [50, 250, 450],
+              "range": [30, 230, 830]
+            },
+            "legend": {"format": ".1s"}
+          },
+          "opacity": {"value": 0.6},
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "AverageofAge", "title": "Average age of Billionaires", "type": "quantitative", "format": ","},
+            {"field": "AverageofNetWorth", "title": "Average net worth of Billionaires", "type": "quantitative", "format": ","}
+          ]
+          
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -12,
+          "fontSize": 11.5,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "Country", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {
+              "test": "datum['Country'] == 'China' || datum['Country'] == 'France' || datum['Country'] == 'United States' || datum['Country'] == 'Eswatini (Swaziland)' ",
+              "value": 1
+            },
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "AverageofAge", "title": "Average age of Billionaires", "type": "quantitative", "format": ","},
+            {"field": "AverageofNetWorth", "title": "Average net worth of Billionaires", "type": "quantitative", "format": ","}
+
+          ]
+        }
+      }
+
+    ]
+  }
